@@ -1,8 +1,7 @@
 FROM debian:11
-WORKDIR /wordpress
+WORKDIR /var/www/wordpress
 WORKDIR /mytemp
-RUN apt update && apt upgrade -y && apt install wget -y && apt install tar -y
-RUN apt install php-fpm php -y
+RUN apt update && apt upgrade -y && apt install -y  wget tar php-fpm php php-mysqli php-mysql php-pdo php-mbstring php-xml
 COPY conf/wp-config.php .
 COPY tools/setup_wordpress.sh .
 COPY conf/www.conf .
