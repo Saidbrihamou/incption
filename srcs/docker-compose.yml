@@ -4,7 +4,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress:/var/www/wordpress
+      - v_wordpress:/var/www/wordpress
     ports:
       - "80:80"
     depends_on:
@@ -14,13 +14,26 @@ services:
       - .env
     build: requirements/wordpress/.
     volumes:
-      - wordpress:/wordpress
+      - v_wordpress:/var/www/wordpress
     depends_on:
       - mariadb  
   mariadb:
+    volumes:
+      - v_mariadb:/var/lib/mysql
     env_file:
       - .env
     build: requirements/mariadb/.
 
 volumes:
-  wordpress:
+  v_wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/sbrihamo/data/wordpress"
+      o: bind
+  v_mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/sbrihamo/data/mariadb"
+      o: bind

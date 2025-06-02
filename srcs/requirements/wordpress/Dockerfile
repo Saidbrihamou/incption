@@ -7,4 +7,4 @@ COPY tools/setup_wordpress.sh .
 COPY conf/www.conf .
 RUN chmod +x setup_wordpress.sh
 CMD ["/mytemp/setup_wordpress.sh"]
-
+                          
