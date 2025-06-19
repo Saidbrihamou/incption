@@ -5,8 +5,11 @@ services:
       - .env
     volumes:
       - v_wordpress:/var/www/wordpress
+    networks:
+      - custom_net
+    restart: on-failure
     ports:
-      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress_php
   wordpress_php:
@@ -15,11 +18,17 @@ services:
     build: requirements/wordpress/.
     volumes:
       - v_wordpress:/var/www/wordpress
+    networks:
+      - custom_net
+    restart: on-failure
     depends_on:
       - mariadb  
   mariadb:
     volumes:
       - v_mariadb:/var/lib/mysql
+    networks:
+      - custom_net
+    restart: on-failure
     env_file:
       - .env
     build: requirements/mariadb/.
@@ -37,3 +46,6 @@ volumes:
       type: none
       device: "/home/sbrihamo/data/mariadb"
       o: bind
+networks:
+  custom_net:
+    driver: bridge

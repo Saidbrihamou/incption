@@ -9,6 +9,8 @@ mv wp-config.php /var/www/wordpress/
 mv www.conf $(find /etc/php/ -type f -name www.conf)
 rm -rf wordpress wordpress-6.8.1.tar.gz
 mkdir -p /run/php
+chown -R www-data:www-data /var/www/wordpress
+chmod -R 755 /var/www/wordpress
 sleep 8
 $(find /usr/sbin/ | grep php-fpm) -F
 
