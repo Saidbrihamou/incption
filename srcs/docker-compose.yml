@@ -22,17 +22,20 @@ services:
       - custom_net
     restart: on-failure
     depends_on:
-      - mariadb  
+      - mariadb 
   mariadb:
-    volumes:
-      - v_mariadb:/var/lib/mysql
+    #  volumes:
+    # - v_mariadb:/var/lib/mysql
     networks:
       - custom_net
     restart: on-failure
     env_file:
       - .env
     build: requirements/mariadb/.
-
+  redis:
+    build: requirements/bonus/redis/.
+    networks:
+      - custom_net
 volumes:
   v_wordpress:
     driver: local

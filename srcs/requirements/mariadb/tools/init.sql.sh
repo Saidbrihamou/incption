@@ -1,6 +1,11 @@
 #!/bin/bash
+mkdir -p /run/mysqld
+mkdir -p /var/lib/mysql
+chown -R mysql:mysql /run/mysqld
+chown -R mysql:mysql /var/lib/mysql
 
 mysqld_safe --skip-networking &
+
 sleep 6
 <<EOF cat | mariadb
 ALTER USER 'root'@'localhost' IDENTIFIED BY "$MYSQL_PASS_ROOT";

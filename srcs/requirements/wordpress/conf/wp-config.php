@@ -30,7 +30,8 @@ define( 'DB_PASSWORD', 'PASSOWRD_RP' );
 
 /** Database hostname */
 define( 'DB_HOST', 'mariadb:3306' );
-
+define('WP_CACHE', true);
+define('WP_REDIS_HOST', 'redis');
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
 
