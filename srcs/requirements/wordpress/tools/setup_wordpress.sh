@@ -14,11 +14,11 @@ define('WP_REDIS_HOST', 'redis');
 EOF
 fi
 sleep 5
-# if ! wp core is-installed --path=/var/www/wordpress --allow-root; then
-# 	wp core install --url=https://10.12.100.153 --title=inception --admin_user=$ADMIN_USER \
-# 		--admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL \
-# 		--path=/var/www/wordpress --allow-root 
-# fi
+if ! wp core is-installed  --path=/var/www/wordpress --allow-root; then
+	wp core install --url=https://10.12.100.198 --title=goodinstall --admin_user=$ADMIN_USER \
+		--admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL \
+		--path=/var/www/wordpress --allow-root 
+fi
 
 mkdir -p /run/php
 chown -R www-data:www-data /var/www/wordpress

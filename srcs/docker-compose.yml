@@ -24,8 +24,8 @@ services:
     depends_on:
       - mariadb 
   mariadb:
-    #  volumes:
-    # - v_mariadb:/var/lib/mysql
+    volumes:
+       - v_mariadb:/var/lib/mysql
     networks:
       - custom_net
     restart: on-failure
