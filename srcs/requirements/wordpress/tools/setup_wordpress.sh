@@ -35,4 +35,4 @@ wp plugin install redis-cache --activate --path=/var/www/wordpress --allow-root
 wp redis enable --path=/var/www/wordpress --allow-root
 
 
-$(find /usr/sbin/ | grep php-fpm) -F
+exec $(find /usr/sbin/ | grep php-fpm) -F

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+chown -R mysql:mysql /var/lib/mysql
 mysqld_safe --skip-networking &
 
 socket="/run/mysqld/mysqld.sock"
