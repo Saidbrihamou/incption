@@ -36,6 +36,13 @@ services:
     build: requirements/bonus/redis/.
     networks:
       - custom_net
+  ftp:
+   build: requirements/bonus/ftp/.
+   ports:
+     - "21:21"
+     - "10100:10100"
+   volumes:
+     - v_wordpress:/var/data/ftp
 volumes:
   v_wordpress:
     driver: local
