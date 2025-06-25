@@ -1,48 +1,81 @@
 services:
   nginx:
-    build: requirements/nginx/.
-    env_file:
-      - .env
-    volumes:
-      - v_wordpress:/var/www/wordpress
-    networks:
-      - custom_net
-    restart: on-failure
-    ports:
-      - "443:443"
-    depends_on:
-      - wordpress_php
+      build: requirements/nginx/.
+      image: nginx
+      container_name: c_nginx
+      env_file:
+        - .env
+      volumes:
+        - v_wordpress:/var/www/wordpress
+      networks:
+        - custom_net
+      restart: on-failure
+      ports:
+        - "443:443"
+      depends_on:
+        - wordpress_php
   wordpress_php:
-    env_file:
-      - .env
-    build: requirements/wordpress/.
-    volumes:
-      - v_wordpress:/var/www/wordpress
-    networks:
-      - custom_net
-    restart: on-failure
-    depends_on:
-      - mariadb 
+      build: requirements/wordpress/.
+      image: wordpress_php
+      container_name: c_wordpress_php
+      env_file:
+        - .env
+
+      volumes:
+        - v_wordpress:/var/www/wordpress
+      networks:
+        - custom_net
+      restart: on-failure
+      depends_on:
+        - mariadb 
   mariadb:
-    volumes:
-       - v_mariadb:/var/lib/mysql
-    networks:
-      - custom_net
-    restart: on-failure
-    env_file:
-      - .env
-    build: requirements/mariadb/.
+      build: requirements/mariadb/.
+      image: mariadb
+      container_name: c_mariadb
+      volumes:
+        - v_mariadb:/var/lib/mysql
+      networks:
+        custom_net:
+            ipv4_address: 172.33.0.33
+      restart: on-failure
+      env_file:
+        - .env
+
   redis:
-    build: requirements/bonus/redis/.
-    networks:
-      - custom_net
+      build: requirements/bonus/redis/.
+      image: redis
+      container_name: c_redis
+      networks:
+        - custom_net
+      restart: on-failure
   ftp:
-   build: requirements/bonus/ftp/.
-   ports:
-     - "21:21"
-     - "10100:10100"
-   volumes:
-     - v_wordpress:/var/data/ftp
+      build: requirements/bonus/ftp/.
+      image: ftp
+      container_name: c_ftp
+      ports:
+        - "21:21"
+        - "10100-10110:10100-10110"
+      volumes:
+        - v_wordpress:/var/data/ftp
+      restart: on-failure
+  adminer:
+      build: requirements/bonus/Adminer/.
+      image: adminer
+      container_name: c_adminer
+      ports:
+        - "2001:80"
+      networks:
+        - custom_net
+      restart: on-failure
+  glances:
+      build: requirements/bonus/glances/.
+      image: glances
+      container_name: c_glances
+      ports:
+        - "61208:61208"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - /etc/os-release:/etc/os-release:ro
 volumes:
   v_wordpress:
     driver: local
@@ -59,3 +92,7 @@ volumes:
 networks:
   custom_net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.33.0.0/26
+          gateway: 172.33.0.1
