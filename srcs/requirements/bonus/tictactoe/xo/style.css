@@ -1,0 +1,108 @@
+body {
+            background-color: beige;
+        }
+        .btn {
+            width: 33.33%;
+            height: 100%;
+            background-color: beige;
+            color: #00c5f9;
+            margin: 0px;
+            text-align: center;
+            font-size: 10vw;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 2s;
+        }
+
+        .btn:hover {
+            background-color: #b68336;
+        }
+        
+        #id_div {
+            background-color: #03A6A1;
+            width: 40%;
+            aspect-ratio: 1 / 1;
+            min-width: 150px;
+            max-width: 500px;
+        }
+
+        .div_rows {
+            background-color: #03A6A1;
+            display: flex;
+            gap: 3px;
+            height: 33.33%;
+        }
+        .div_haveline
+        {
+            margin-top: 3px;
+        }
+        #title
+        {
+            text-align: center;
+            color: #FF4F0F;
+            border-style: double;
+            border-color: #FFA673;
+            width: 60%;
+            align-items: center;
+            font-family: sans-serif;
+            transition: font-size 1s , color 1s, text-shadow 1s;
+            
+        }
+        #title:hover
+        {
+            font-size: 40px;
+            color: rgb(254, 39, 165);
+            text-shadow: 3px -2px 3px black;
+        }
+        #big_div
+        {
+            position: relative;
+            margin-top: 15%;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+
+        }
+        #down_div
+        {
+            margin-top: 60px;
+            border-width: 3px;
+            border-style: dashed;
+            display: flex;
+            width: 60%;
+            aspect-ratio: 5 / 1;
+            max-width: 600px;
+            min-width: 200px;
+        }
+        button
+        {
+            background-color: #06923E;
+            height: 40%;
+            border-radius: 10px;
+            margin: 25px;
+        }
+        h5
+        {
+            background-color: #E3F0AF;
+            /* background-color: #00ff08; */
+
+            border-width: 7px;
+            border-color: rgba(0, 0, 0, 0);
+            text-align: center;
+            border-style: solid;
+            width: 60px;
+            margin: 10px;
+        }
+        .div_towpart
+        {
+            height: 100%;
+            width: 50%;
+        }
+        #dev_palyers
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }

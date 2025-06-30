@@ -35,8 +35,7 @@ services:
       volumes:
         - v_mariadb:/var/lib/mysql
       networks:
-        custom_net:
-            ipv4_address: 172.33.0.33
+        - custom_net
       restart: on-failure
       env_file:
         - .env
@@ -73,9 +72,17 @@ services:
       container_name: c_glances
       ports:
         - "61208:61208"
+      restart: on-failure
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock:ro
         - /etc/os-release:/etc/os-release:ro
+  tictactoe: 
+      build: requirements/bonus/tictactoe/.
+      image: tictactoe
+      container_name: c_tictactoe
+      ports:
+        - 32302:80
+      restart: on-failure
 volumes:
   v_wordpress:
     driver: local
@@ -92,7 +99,3 @@ volumes:
 networks:
   custom_net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.33.0.0/26
-          gateway: 172.33.0.1

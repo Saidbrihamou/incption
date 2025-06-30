@@ -11,7 +11,7 @@ do
 	sleep 1
 done 
 
-if [ ! -f /var/www/wordpress/wp-config.ph ]; then
+if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	wp core download --path=/var/www/wordpress/ --allow-root
 	wp config create --dbname=$MYSQL_WORDPRESS --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASS --dbhost=$DB__HOST \
 		--path=/var/www/wordpress --allow-root --extra-php << EOF
