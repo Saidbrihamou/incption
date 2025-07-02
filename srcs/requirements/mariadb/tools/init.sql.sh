@@ -1,6 +1,7 @@
 #!/bin/bash
 
-chown -R mysql:mysql /var/lib/mysql
+chown -R mysql:mysql /var/lib/
+chmod 774 /var/lib
 
 mysqld_safe --skip-networking &
 

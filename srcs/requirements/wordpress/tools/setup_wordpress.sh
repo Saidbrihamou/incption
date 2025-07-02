@@ -21,14 +21,14 @@ EOF
 fi
 
 if ! wp core is-installed  --path=/var/www/wordpress --allow-root; then
-	wp core install --url=https://10.12.100.198 --title=goodinstall --admin_user=$ADMIN_USER \
+	wp core install --url=https://$DOMIN_NAME --title=goodinstall --admin_user=$ADMIN_USER \
 		--admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL \
 		--path=/var/www/wordpress --allow-root 
 fi
 
 mkdir -p /run/php
 chown -R www-data:www-data /var/www/wordpress
-chmod -R 755 /var/www/wordpress
+chmod -R 774 /var/www/wordpress
 
 
 wp plugin install redis-cache --activate --path=/var/www/wordpress --allow-root

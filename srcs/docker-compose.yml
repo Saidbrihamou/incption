@@ -1,8 +1,8 @@
 services:
   nginx:
       build: requirements/nginx/.
-      image: nginx
-      container_name: c_nginx
+      image: nginx:vsb1.2
+      container_name: nginx
       env_file:
         - .env
       volumes:
@@ -16,8 +16,8 @@ services:
         - wordpress_php
   wordpress_php:
       build: requirements/wordpress/.
-      image: wordpress_php
-      container_name: c_wordpress_php
+      image: wordpress_php:vsb1.2
+      container_name: wordpress_php
       env_file:
         - .env
 
@@ -30,8 +30,8 @@ services:
         - mariadb 
   mariadb:
       build: requirements/mariadb/.
-      image: mariadb
-      container_name: c_mariadb
+      image: mariadb:vsb1.2
+      container_name: mariadb
       volumes:
         - v_mariadb:/var/lib/mysql
       networks:
@@ -42,25 +42,27 @@ services:
 
   redis:
       build: requirements/bonus/redis/.
-      image: redis
-      container_name: c_redis
+      image: redis:vsb1.2
+      container_name: redis
       networks:
         - custom_net
       restart: on-failure
   ftp:
       build: requirements/bonus/ftp/.
-      image: ftp
-      container_name: c_ftp
+      image: ftp:vsb1.2
+      container_name: ftp
+      env_file:
+        - .env
       ports:
-        - "21:21"
+        - "33:21"
         - "10100-10110:10100-10110"
       volumes:
         - v_wordpress:/var/data/ftp
       restart: on-failure
   adminer:
       build: requirements/bonus/Adminer/.
-      image: adminer
-      container_name: c_adminer
+      image: adminer:vsb1.2
+      container_name: adminer
       ports:
         - "2001:80"
       networks:
@@ -68,8 +70,8 @@ services:
       restart: on-failure
   glances:
       build: requirements/bonus/glances/.
-      image: glances
-      container_name: c_glances
+      image: glances:vsb1.2
+      container_name: glances
       ports:
         - "61208:61208"
       restart: on-failure
@@ -78,8 +80,8 @@ services:
         - /etc/os-release:/etc/os-release:ro
   tictactoe: 
       build: requirements/bonus/tictactoe/.
-      image: tictactoe
-      container_name: c_tictactoe
+      image: tictactoe:vsb1.2
+      container_name: tictactoe
       ports:
         - 32302:80
       restart: on-failure
