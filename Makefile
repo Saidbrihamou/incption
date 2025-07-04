@@ -12,5 +12,5 @@ down:
 
 build:
 	docker compose -f ${PATH_C} build 
-# clean:
-# 	docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
+clean:
+	bash -c 'docker stop $$(docker ps -qa); docker rm $$(docker ps -qa); docker rmi -f $$(docker images -qa); docker volume rm $$(docker volume ls -q); docker network rm $$(docker network ls -q); echo "successfully clean"' 2>/dev/null
