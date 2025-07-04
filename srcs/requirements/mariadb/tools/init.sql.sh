@@ -1,13 +1,13 @@
 #!/bin/bash
+MYSQL_PASS_ROOT=$(cat /run/secrets/db_root_password)
+MYSQL_PASS=$(cat /run/secrets/db_password)
 
-chown -R mysql:mysql /var/lib/
-chmod 774 /var/lib
+chown -R mysql:mysql /var/lib/mysql
+chmod 774 /var/lib/mysql
 
 mysqld_safe --skip-networking &
 
-socket="/run/mysqld/mysqld.sock"
-
-until mysqladmin --protocol=socket --socket="$socket" -u root ping --silent ; do
+until mysqladmin ping --silent ; do
 	echo " ⏳ Waiting for  MariaDB ...."
 	sleep 1
 done

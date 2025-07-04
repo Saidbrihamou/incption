@@ -4,10 +4,12 @@ all:
 	mkdir -p /home/sbrihamo/data/mariadb
 	mkdir -p /home/sbrihamo/data/wordpress
 	docker compose -f ${PATH_C} up
+
 up:all
 
 down:
 	docker compose -f ${PATH_C} down
+
 build:
 	docker compose -f ${PATH_C} build 
 # clean:

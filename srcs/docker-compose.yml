@@ -20,7 +20,9 @@ services:
       container_name: wordpress_php
       env_file:
         - .env
-
+      secrets:
+        - wp_password
+        - db_password
       volumes:
         - v_wordpress:/var/www/wordpress
       networks:
@@ -39,7 +41,9 @@ services:
       restart: on-failure
       env_file:
         - .env
-
+      secrets:
+        - db_password
+        - db_root_password
   redis:
       build: requirements/bonus/redis/.
       image: redis:vsb1.2
@@ -53,6 +57,8 @@ services:
       container_name: ftp
       env_file:
         - .env
+      secrets:
+        - ftp_password
       ports:
         - "33:21"
         - "10100-10110:10100-10110"
@@ -98,6 +104,17 @@ volumes:
       type: none
       device: "/home/sbrihamo/data/mariadb"
       o: bind
+  
 networks:
   custom_net:
     driver: bridge
+  
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_password:
+    file: ../secrets/wp_password.txt
+  ftp_password:
+    file: ../secrets/ftp_password.txt

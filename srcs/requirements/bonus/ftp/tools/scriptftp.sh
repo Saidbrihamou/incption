@@ -1,5 +1,6 @@
 #!/bin/bash
 
+FTP_USER_PASS=$(cat /run/secrets/ftp_password)
 useradd -m $FTP_USER_NAME
 <<EOF cat | passwd $FTP_USER_NAME
 $FTP_USER_PASS

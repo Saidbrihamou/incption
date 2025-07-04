@@ -1,5 +1,8 @@
 #!/bin/bash
 
+MYSQL_PASS=$(cat /run/secrets/db_password)
+WP_ADMIN_PASS=$(cat /run/secrets/wp_password)
+
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 cp wp-cli.phar /usr/local/bin/wp
@@ -18,11 +21,12 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 define('WP_CACHE', true);
 define('WP_REDIS_HOST', 'redis');
 EOF
+
 fi
 
 if ! wp core is-installed  --path=/var/www/wordpress --allow-root; then
-	wp core install --url=https://$DOMIN_NAME --title=goodinstall --admin_user=$ADMIN_USER \
-		--admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL \
+	wp core install --url=https://$DOMIN_NAME --title=goodinstall --admin_user=$WP_ADMIN_USER \
+		--admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL \
 		--path=/var/www/wordpress --allow-root 
 fi
 

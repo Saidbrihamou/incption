@@ -8,4 +8,6 @@ until nc -vz wordpress_php 9000 2> /dev/null; do
     sleep 1
 done
 
+echo " ✅ nginx connect successfully to wordpress_php"
+
 exec "nginx" "-g" "daemon off;"
