@@ -1,4 +1,5 @@
 #!/bin/bash
+
 MYSQL_PASS_ROOT=$(cat /run/secrets/db_root_password)
 MYSQL_PASS=$(cat /run/secrets/db_password)
 
@@ -12,7 +13,7 @@ until mysqladmin ping --silent ; do
 	sleep 1
 done
 
-msgerror=$(mysqladmin ping -u $MYSQL_NAME_ROOT -p"$MYSQL_PASS_ROOT" 2>&1  1> /dev/null)
+msgerror=$(mysqladmin ping -u $MYSQL_USER -p"$MYSQL_PASS" 2>&1  1> /dev/null)
 
 if [ "$msgerror" != "" ]; then
 echo " ❗️ start create users and database in mariadb"
