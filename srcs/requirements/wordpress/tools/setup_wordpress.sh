@@ -12,7 +12,7 @@ until mysqladmin ping --host=mariadb -u $MYSQL_USER -p"$MYSQL_PASS" --silent ;
 do
 	echo " ⏳ WordPress Waiting for  MariaDB ...."
 	sleep 1
-done 
+done
 
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	wp core download --path=/var/www/wordpress/ --allow-root
