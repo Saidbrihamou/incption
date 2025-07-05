@@ -74,16 +74,19 @@ services:
       networks:
         - custom_net
       restart: on-failure
-  glances:
-      build: requirements/bonus/glances/.
-      image: glances:vsb1.2
-      container_name: glances
+  cadvisor:
+      build: requirements/bonus/cadvisor/.
+      image: cadvisor:vsb1.2
+      container_name: cadvisor
       ports:
-        - "61208:61208"
+        - "8080:8080"
       restart: on-failure
       volumes:
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - /etc/os-release:/etc/os-release:ro
+        - /:/rootfs:ro 
+        - /var/run:/var/run:ro 
+        - /sys:/sys:ro 
+        - /var/lib/docker/:/var/lib/docker:ro 
+        - /dev/disk/:/dev/disk:ro 
   tictactoe: 
       build: requirements/bonus/tictactoe/.
       image: tictactoe:vsb1.2
